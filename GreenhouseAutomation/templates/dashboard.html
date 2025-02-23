@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - FutureFarmers{% endblock %}
+
+{% block content %}
+<!-- Dashboard Header -->
+<div class="header text-center py-4 bg-info text-white mb-4">
+    <h1>FutureFarmers Dashboard</h1>
+    <h4>From Sethu Institute of Technology</h4>
+</div>
+
+<!-- Dashboard Content -->
+<div class="container">
+    <h2 class="dashboard-title text-center mb-4">Greenhouse Automation</h2>
+    <div class="row d-flex justify-content-center">
+        <!-- Temperature Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card sensor-card p-3">
+                <h5 class="text-center">Temperature</h5>
+                <p id="temp" class="text-center">28°C</p>
+                <div class="chart-container">
+                    <canvas id="tempChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Humidity Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card sensor-card p-3">
+                <h5 class="text-center">Humidity</h5>
+                <p id="humidity" class="text-center">60%</p>
+                <div class="chart-container">
+                    <canvas id="humidityChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Soil Moisture Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card sensor-card p-3">
+                <h5 class="text-center">Soil Moisture</h5>
+                <p id="moisture" class="text-center">700</p>
+                <div class="chart-container">
+                    <canvas id="moistureChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- pH Value Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card sensor-card p-3">
+                <h5 class="text-center">pH Value</h5>
+                <p id="ph" class="text-center">7.0</p>
+                <div class="chart-container">
+                    <canvas id="phChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- CO2 Level Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card sensor-card p-3">
+                <h5 class="text-center">CO2 Level</h5>
+                <p id="co2" class="text-center">400 ppm</p>
+                <div class="chart-container">
+                    <canvas id="co2Chart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Light Intensity Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card sensor-card p-3">
+                <h5 class="text-center">Light Intensity</h5>
+                <p id="light" class="text-center">800 lux</p>
+                <div class="chart-container">
+                    <canvas id="lightChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional CSS for Effects -->
+<style>
+    /* Fade in animation for sensor cards on load */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .sensor-card {
+        animation: fadeIn 0.8s ease-out both;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    /* Hover effects for sensor cards */
+    .sensor-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<!-- Include Chart.js and initialize charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function createChart(canvasId) {
+        var ctx = document.getElementById(canvasId).getContext('2d');
+        return new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['0s', '5s', '10s', '15s', '20s'],
+                datasets: [{
+                    label: canvasId.replace('Chart', ''),
+                    data: [0, 0, 0, 0, 0],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (s)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    var tempChart = createChart('tempChart');
+    var humidityChart = createChart('humidityChart');
+    var moistureChart = createChart('moistureChart');
+    var phChart = createChart('phChart');
+    var co2Chart = createChart('co2Chart');
+    var lightChart = createChart('lightChart');
+</script>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}About FutureFarmers{% endblock %}
+
+{% block content %}
+<style>
+    /* Inline styles for about page */
+    .header {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 24px;
+        font-weight: bold;
+        animation: fadeIn 1s ease-in-out;
+    }
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .box {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+    .box:hover {
+        transform: scale(1.02);
+    }
+    .team-list {
+        list-style: none;
+        padding: 0;
+    }
+    .team-list li {
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .footer {
+        text-align: center;
+        padding: 10px;
+        background: #333;
+        color: white;
+        margin-top: 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        animation: fadeIn 1.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+
+<div class="container">
+    <div class="header">About FutureFarmers</div>
+    <div class="flex-container">
+        <div class="box">
+            <h2>About Us</h2>
+            <p>We are FutureFarmers, a team dedicated to revolutionizing agriculture with smart technology. Our goal is to integrate cutting-edge technology into farming practices, making them more efficient, sustainable, and productive.</p>
+        </div>
+        <div class="box">
+            <h2>Our Goal</h2>
+            <p>FutureFarmers aims to innovate the agricultural sector by leveraging IoT and AI-driven solutions. Our mission is to create a smarter and more sustainable farming ecosystem that benefits both farmers and the environment.</p>
+        </div>
+        <div class="box">
+            <h2>Team Members</h2>
+            <ul class="team-list">
+                <li>Team Leader - Abishek M - Department of Computer Science Engineering (Artificial Intelligence and Machine Learning)</li>
+                <li>Member 2 - Ajith P - Department of Computer Science Engineering (Artificial Intelligence and Machine Learning)</li>
+                <li>Member 3 - Karthick B - Department of Computer Science Engineering (Artificial Intelligence and Machine Learning)</li>
+                <li>Member 4 - Harish Raj - Department of Computer Science Engineering (Artificial Intelligence and Machine Learning)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

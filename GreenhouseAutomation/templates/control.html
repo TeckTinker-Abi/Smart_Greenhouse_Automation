@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}Greenhouse Automation - Control Panel{% endblock %}
+
+{% block content %}
+<style>
+    /* Inline styles for control page */
+    .header {
+        text-align: center;
+        padding: 20px;
+        background: #2c3e50;
+        color: white;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .control-card {
+        width: 260px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin: 15px;
+        padding: 20px;
+        background: white;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .control-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .control-card button {
+        margin: 5px;
+        width: 100px;
+    }
+    .status {
+        font-weight: bold;
+        color: red;
+    }
+    .status.on {
+        color: green;
+    }
+</style>
+
+<div class="header">
+    <h1>FutureFarmers</h1>
+    <h3>From Sethu Institute of Technology</h3>
+    <h2>Greenhouse Automation - Control Panel</h2>
+</div>
+<div class="container">
+    <h2>Actuator Controls</h2>
+    <div class="row">
+        <!-- Vent Opening Card -->
+        <div class="control-card">
+            <h5><i class="fas fa-wind"></i> Vent Opening</h5>
+            <input type="range" id="ventRange" min="0" max="180" value="0" oninput="updateVentValue()">
+            <p id="ventValue">0°</p>
+            <button class="btn btn-primary" onclick="applyVentOpening()">Apply</button>
+        </div>
+        <!-- Heating System Card -->
+        <div class="control-card">
+            <h5><i class="fas fa-fire"></i> Heating System</h5>
+            <button class="btn btn-danger" onclick="setActuator('heating', 'ON')">ON</button>
+            <button class="btn btn-secondary" onclick="setActuator('heating', 'OFF')">OFF</button>
+            <p id="heatingStatus" class="status">OFF</p>
+        </div>
+        <!-- Cooling Fan Card -->
+        <div class="control-card">
+            <h5><i class="fas fa-fan"></i> Cooling Fan</h5>
+            <button class="btn btn-info" onclick="setActuator('cooling', 'ON')">ON</button>
+            <button class="btn btn-secondary" onclick="setActuator('cooling', 'OFF')">OFF</button>
+            <p id="coolingStatus" class="status">OFF</p>
+        </div>
+        <!-- Water Pump Card -->
+        <div class="control-card">
+            <h5><i class="fas fa-tint"></i> Water Pump</h5>
+            <button class="btn btn-success" onclick="setActuator('pump', 'ON')">ON</button>
+            <button class="btn btn-secondary" onclick="setActuator('pump', 'OFF')">OFF</button>
+            <p id="pumpStatus" class="status">OFF</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateVentValue() {
+        document.getElementById('ventValue').innerText = document.getElementById('ventRange').value + '°';
+    }
+    
+    function applyVentOpening() {
+        alert('Vent Opening Set to ' + document.getElementById('ventRange').value + '°');
+    }
+    
+    function setActuator(actuator, state) {
+        let statusElement = document.getElementById(actuator + 'Status');
+        statusElement.innerText = state;
+        if (state === 'ON') {
+            statusElement.classList.add('on');
+        } else {
+            statusElement.classList.remove('on');
+        }
+    }
+</script>
+{% endblock %}
